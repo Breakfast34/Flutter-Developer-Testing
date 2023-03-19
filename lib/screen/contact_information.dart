@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_testing/components/list_user.dart';
 import 'package:flutter_testing/models/user_model.dart';
 import 'package:flutter_testing/screen/detail_user.dart';
-import 'package:flutter_testing/services/user_apt.dart';
+import 'package:flutter_testing/services/user_api.dart';
 import 'package:flutter_testing/themes/fonts.dart';
 import 'package:flutter_testing/themes/themes_colors.dart';
 
