@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-TextStyle get sectionSytle {
+TextStyle get sectionStyle {
   return const TextStyle(
     fontSize: 22,
     overflow: TextOverflow.ellipsis,
@@ -9,7 +9,7 @@ TextStyle get sectionSytle {
   );
 }
 
-TextStyle get titleSytle {
+TextStyle get titleStyle {
   return const TextStyle(
     fontSize: 16,
     overflow: TextOverflow.ellipsis,
@@ -17,7 +17,7 @@ TextStyle get titleSytle {
   );
 }
 
-TextStyle get subtitleSytle {
+TextStyle get subtitleStyle {
   return const TextStyle(
     fontSize: 14,
     overflow: TextOverflow.ellipsis,

@@ -38,14 +38,14 @@ class ListUsers extends StatelessWidget {
                 children: [
                   Text(
                     firstname,
-                    style: titleSytle,
+                    style: titleStyle,
                   ),
                   const SizedBox(
                     width: 10,
                   ),
                   Text(
                     lastname,
-                    style: titleSytle,
+                    style: titleStyle,
                   ),
                 ],
               ),
@@ -53,14 +53,14 @@ class ListUsers extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 3.0, bottom: 5.0),
                 child: Text(
                   tel,
-                  style: subtitleSytle,
+                  style: subtitleStyle,
                 ),
               ),
             ],
           ),
           subtitle: Text(
             email,
-            style: subtitleSytle,
+            style: subtitleStyle,
           ),
         ),
       ),

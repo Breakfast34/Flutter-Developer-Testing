@@ -7,11 +7,11 @@ class UserData {
     required this.email,
   });
 
-  String image;
-  String firstname;
-  String lastname;
-  String tel;
-  String email;
+  final String image;
+  final String firstname;
+  final String lastname;
+  final String tel;
+  final String email;
 
   factory UserData.fromJson(Map<String, dynamic> json) => UserData(
         image: json["image"],

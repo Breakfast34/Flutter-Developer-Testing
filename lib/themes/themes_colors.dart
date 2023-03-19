@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ThemeColor {
-  static Color appbar = const Color(0xFF1C232D);
+class ThemeColors {
+  static const Color camel = Color(0xFF1E1E1E);
+
 }

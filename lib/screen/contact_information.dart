@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_testing/Themes/themes_colors.dart';
+
 import 'package:flutter_testing/components/list_user.dart';
 import 'package:flutter_testing/models/user_model.dart';
 import 'package:flutter_testing/screen/detail_user.dart';
 import 'package:flutter_testing/services/user_apt.dart';
 import 'package:flutter_testing/themes/fonts.dart';
+import 'package:flutter_testing/themes/themes_colors.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
@@ -15,9 +16,11 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   List<UserData> userData = [];
-
+  bool backToTop = false;
+  bool isLastIndex = false;
+  ScrollController scrollController = ScrollController();
   Future<void> fetchUserData() async {
     final response = await UserApi().fetchUserData();
     setState(() {
@@ -28,22 +31,36 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     fetchUserData();
+    scrollUp();
     super.initState();
+  }
+
+  void scrollUp() {
+    scrollController.addListener(() {
+      setState(() {
+        backToTop = scrollController.offset > 200 ? true : false;
+        isLastIndex =
+            scrollController.offset > scrollController.position.maxScrollExtent
+                ? true
+                : false;
+      });
+    });
   }
 
   @override
   void dispose() {
     super.dispose();
+    scrollController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('รายชื่อผู้ติดต่อ', style: sectionSytle)),
-        backgroundColor: ThemeColor.appbar,
+        title: Center(child: Text('รายชื่อผู้ติดต่อ', style: sectionStyle)),
       ),
       body: ListView.builder(
+        controller: scrollController,
         itemCount: userData.length,
         itemBuilder: (context, index) {
           return dismissbles(
@@ -70,6 +87,32 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
       ),
+      floatingActionButton: AnimatedContainer(
+        duration: backToTop
+            ? const Duration(milliseconds: 1000)
+            : const Duration(milliseconds: 200),
+        height: backToTop ? 100 : 0,
+        child: Align(
+          alignment: Alignment.bottomRight,
+          child: CircleAvatar(
+            backgroundColor: ThemeColors.camel,
+            child: IconButton(
+              onPressed: () {
+                scrollController.animateTo(
+                  0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.linear,
+                );
+              },
+              icon: Icon(
+                Icons.arrow_upward,
+                size: backToTop ? 20 : 0,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -86,21 +129,21 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context) => AlertDialog(
           title: Text(
             "Confirm",
-            style: sectionSytle,
+            style: sectionStyle,
           ),
           content: Text(
             "Are you sure you wish to delete this item?",
-            style: titleSytle,
+            style: titleStyle,
             maxLines: 2,
           ),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: Text("CANCEL", style: subtitleSytle),
+              child: Text("CANCEL", style: subtitleStyle),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: Text("DELETE", style: subtitleSytle),
+              child: Text("DELETE", style: subtitleStyle),
             ),
           ],
         ),

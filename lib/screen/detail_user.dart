@@ -48,14 +48,9 @@ class _DetailUserState extends State<DetailUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading:
-            defaultTargetPlatform == TargetPlatform.android ? false : true,
-        title: defaultTargetPlatform == TargetPlatform.android
-            ? Center(
-                child: Text('ข้อมูลผู้ติดต่อ', style: sectionSytle),
-              )
-            : Text('ข้อมูลผู้ติดต่อ', style: sectionSytle),
-        backgroundColor: ThemeColor.appbar,
+        centerTitle: true,
+        // automaticallyImplyLeading: false,
+        title: Text('ข้อมูลผู้ติดต่อ', style: sectionStyle),
       ),
       body: Center(
         child: Column(
@@ -76,14 +71,14 @@ class _DetailUserState extends State<DetailUser> {
                 children: [
                   Text(
                     widget.firstname,
-                    style: titleSytle,
+                    style: titleStyle,
                   ),
                   const SizedBox(
                     width: 10,
                   ),
                   Text(
                     widget.lastname,
-                    style: titleSytle,
+                    style: titleStyle,
                   ),
                 ],
               ),
@@ -95,7 +90,7 @@ class _DetailUserState extends State<DetailUser> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "เบอร์โทรศัพท์  ${widget.tel}",
-                  style: subtitleSytle,
+                  style: subtitleStyle,
                 ),
               ),
             ),
@@ -106,7 +101,7 @@ class _DetailUserState extends State<DetailUser> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "อีเมล ${widget.email}",
-                  style: subtitleSytle,
+                  style: subtitleStyle,
                 ),
               ),
             ),
